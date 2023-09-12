@@ -99,7 +99,7 @@ class CartProvider extends ChangeNotifier {
   void removeFromCart(ProductModel data) {
     int index = cart.indexWhere((element) => element == data);
     if (index != -1) {
-      if (cart[index].count > 1) {
+      if (cart[index].count > -1) {
         cart[index].count--;
       } else {
         cart.removeAt(index);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../models/product model.dart';
-import '../screens/Fish.dart';
 import '../screens/Meat.dart';
 
 class CategoryItemCard extends StatelessWidget {
@@ -34,20 +33,23 @@ class CategoryItemCard extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
+           Padding(
+             padding: const EdgeInsets.all(8.0),
+             child:
+            Text(
               title,
               style: const TextStyle(fontWeight: FontWeight.bold,fontSize:16 ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: ElevatedButton(
+           ),
+
+            ElevatedButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>MeatItemScreen()),);
                 }, child: const Text("View More")),
-          ),
+
+
+
+
         ],
       ),
     );
