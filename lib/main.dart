@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meat_shop_app/providers/cart%20provider.dart';
 import 'package:meat_shop_app/screens/intro.dart';
+
 import 'package:provider/provider.dart';
 
 
@@ -13,13 +14,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<CartProvider>(create: (_)=>CartProvider(),
-
+    return ChangeNotifierProvider<CartProvider>(create: (context) => CartProvider(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          home: IntroScreen()
-
+        home: IntroPage(),
       ),
     );
   }

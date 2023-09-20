@@ -1,15 +1,8 @@
-enum CategoryType {meat, fish, marinateditems, Readytocook }
-
-class ProductModel {
+class Products {
   final String name;
-  final num price;
+  final int price;
   final String image;
   int count;
 
-  ProductModel({
-    required this.name,
-    required this.price,
-    required this.image,
-    this.count = 1,
-  });
+  Products({required this.name, required this.price, required this.image, this.count = 1});
 }

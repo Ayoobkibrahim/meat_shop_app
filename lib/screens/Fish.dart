@@ -1,63 +1,77 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import '../components/main_title.dart';
 import '../providers/cart provider.dart';
-import '../widgets/main_title.dart';
-import '../widgets/product items.dart';
-import 'cart.dart';
+import 'card.dart';
 
-
-class FishItemScreen extends StatelessWidget {
-  const FishItemScreen({super.key});
+class FishItems extends StatelessWidget {
+  FishItems({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
-
-
-  @override
-  Widget build(BuildContext context) {
-    final fishItems = context.watch<CartProvider>().fishh;
-    final cart = context.watch<CartProvider>().cart;
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            MainTitle(title: "Fish"),
-            Expanded(
-              child: GridView.builder(
-                  itemCount: fishItems.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, childAspectRatio: 1 / 1.4),
-                  itemBuilder: (context, index) => ProductItemCard(
-                    title: fishItems[index].name,
-                    price: fishItems[index].price.toString(),
-                    imageUrl: fishItems[index].image,
-                    onPressed: () {
-                      Provider.of<CartProvider>(context, listen: false)
-                          .addToCart(fishItems[index]);
-                    },
-                  )),
-            ),
-          ],
+    var fishhome = context.watch<CartProvider>().fishhome;
+    var fishcart = context.watch<CartProvider>().cartall;
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.black),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        onPressed: () => Navigator.push(context, MaterialPageRoute(
-          builder: (context) {
-            return CartScreen();
-          },
-        )),
-        child:const Wrap(children: [
-          Icon(
-            Icons.shopping_cart,
-            color: Colors.white,
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.black,
+          onPressed: () => Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return CartPage();
+            },
+          )),
+          child: Wrap(
+              children: [
+                Icon(
+                  Icons.shopping_bag,
+                  color: Colors.white,
+                ),
+                Text("${fishcart.length}")
+              ]
           ),
-
-        ]),
+        ),
+        body: Padding(
+          padding:
+          const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 30),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Fish Items",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                GridView.builder(
+                    itemCount: fishhome.length,
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, childAspectRatio: 0.8),
+                    itemBuilder: (context, index) {
+                      var fish= fishhome[index];
+                      return ItemTile(
+                        ItemName: fish.name,
+                        ItemPrice: "${fish.price}",
+                        ImagePath: fish.image,
+                        color: Colors.green,
+                        onPressed: () {
+                          context.read<CartProvider>().addToCart(fish);
+                        },
+                      );
+                    })
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
+}

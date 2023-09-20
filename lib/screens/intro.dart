@@ -1,70 +1,72 @@
 import 'package:flutter/material.dart';
 
-import 'category.dart';
+import 'login.dart';
 
 
-class IntroScreen extends StatelessWidget {
-  const IntroScreen({super.key});
+
+
+
+class IntroPage extends StatelessWidget {
+  const IntroPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Column(
-
-          children: [
-            Image.network(
-              "https://images.unsplash.com/photo-1602470520998-f4a52199a3d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fG1lYXR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-              fit: BoxFit.contain,
-              width: 300,
-              height: 300,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            const Text(
-              "We Deliver fresh\nmeats at your \ndoorstep ",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 46,
+      body:  Container(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 80,left: 40,right: 40,bottom: 40),
+                child: Image.asset(
+                  "assets/logo.png",
+                  height: 200,
+                  width: 200,
+                ),
               ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            SizedBox(
-              height: 80,
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>const CategoryScreen(),
-                    ),
-                  );
-                },
-                child: const Text(
-                  "Get Started",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+              Text("We deliver fresh meats at your doorstep",
+                textAlign: TextAlign.center,
+                style:
+                TextStyle(fontSize: 40,fontWeight: FontWeight.bold, ),),
+              SizedBox(
+                height: 10,
+              ),
+              Text("Fresh items everyday",
+                textAlign: TextAlign.center,
+                style:
+                TextStyle(fontSize: 15,fontWeight: FontWeight.bold, ),),
+              Spacer(),
+              // get started button
+              GestureDetector(
+                onTap: () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return LoginPage();
+                    },
                   ),
                 ),
-                style: ButtonStyle(
-                    backgroundColor:
-                    MaterialStatePropertyAll(Colors.greenAccent),
-                    shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)))),
+                child: Container(
+                  padding: const EdgeInsets.all(30),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.green ,
+                  ),
+                  child: const Text(
+                    "Get Started",
+                    style: TextStyle(
+                      color: Colors.white,
+                      // fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
               ),
-            ),
-            const Spacer(),
-          ],
+              Spacer()
+
+            ],
+          ),
         ),
       ),
     );
